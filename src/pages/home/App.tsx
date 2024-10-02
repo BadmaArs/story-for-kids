@@ -1,10 +1,10 @@
-import Count from "@/shared/ui/counter/ui/count";
+import { BookList } from "@/widgets/book-list";
 
 function App() {
     return (
         <>
-            <div className="pt-10">
-                <Count />
+            <div className="">
+                <BookList />
             </div>
         </>
     );

@@ -13,7 +13,7 @@ const Count = () => {
                     className="btn btn-neutral"
                     onClick={() => dispatch(increment())}
                 >
-                    Neutral
+                    ДОБАВИТЬ +1
                 </button>
             </div>
             <div className="">
