@@ -11,14 +11,16 @@ const Bookmark = () => {
 
     return (
         <div
-            className="flex justify-end px-5 md:px-20 relative cursor-pointer"
+            className="flex justify-end py-5 relative cursor-pointer"
             onClick={handleToggleBookmark}
         >
-            <img
-                src={isActive ? bookmarkActiveIcon : bookmarkNoActiveIcon}
-                className="w-12 md:w-36 absolute -top-2 md:-top-7"
-                alt={isActive ? "Active Bookmark" : "Inactive Bookmark"}
-            />
+            <button className="btn btn-circle flex justify-center items-center px-3 md:px-5 md:w-16 md:h-16">
+                <img
+                    src={isActive ? bookmarkActiveIcon : bookmarkNoActiveIcon}
+                    className="w-full"
+                    alt={isActive ? "Active Bookmark" : "Inactive Bookmark"}
+                />
+            </button>
         </div>
     );
 };
