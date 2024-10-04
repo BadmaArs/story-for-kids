@@ -7,7 +7,7 @@ export function makeStore() {
     const store = configureStore({
         reducer: {
             count: counterSlice,
-            books: bookSlice
+            books: bookSlice,
         },
     });
     setupListeners(store.dispatch);
