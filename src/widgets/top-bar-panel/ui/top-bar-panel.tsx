@@ -1,12 +1,15 @@
 import { Steps } from "@/entities/steps";
 import { Bookmark } from "@/features/bookmark";
+import { ToReturn } from "@/shared/ui/to-return";
 
 const TopBarPanel = () => {
     return (
         <>
             <div className="flex justify-between px-5 md:px-10">
                 <div className="flex items-center justify-center md:py-5">
-                    <button className="btn">Вернуться</button>
+                    <ToReturn to="/lesson">
+                        <button className="btn">Вернуться</button>
+                    </ToReturn>
                 </div>
                 <div className="">
                     <Bookmark />
