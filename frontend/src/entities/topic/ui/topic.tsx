@@ -7,18 +7,19 @@ const Topic = () => {
                 <Link to="/quiz">
                     <div
                         key={index}
-                        className="flex justify-center items-center bg-white h-32 w-full border-4 border-black rounded-3xl "
+                        className="flex justify-center items-center w-full"
                     >
-                        <span className="text-brown-100 text-lg md:text-3xl font-bold p-2 rounded text-center">
+                        {/* <span className="text-brown-100 text-lg md:text-3xl font-bold p-2 rounded text-center">
                             Тема {index + 1}
-                        </span>
+                        </span> */}
+                        <button className="btn btn-lg w-full">
+                            Тема {index + 1}
+                        </button>
                     </div>
                 </Link>
             ))}
-            <div className="flex justify-center items-center bg-white h-32 w-full border-4 border-black rounded-3xl ">
-                <span className="text-brown-100 text-lg md:text-lg font-bold p-2 rounded">
-                    Закладки
-                </span>
+            <div className="flex justify-center items-center">
+                <button className="btn btn-lg w-full">Закладки</button>
             </div>
         </>
     );
