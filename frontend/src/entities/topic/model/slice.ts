@@ -1,43 +1,43 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { fetchPosts } from "./thunks";
+import { fetchLessons } from "./thunks";
 
 interface Post {
     id: number;
     title: string;
     body: string;
 }
-interface PostsState {
+interface LessonsState {
     posts: Post[];
     loading: boolean;
     error: string | null;
 }
-const initialState: PostsState = {
+const initialState: LessonsState = {
     posts: [],
     loading: false,
     error: null,
 };
-const postsSlice = createSlice({
+const lessonsSlice = createSlice({
     name: "posts",
     initialState,
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(fetchPosts.pending, (state) => {
+            .addCase(fetchLessons.pending, (state) => {
                 state.loading = true;
                 state.error = null;
             })
             .addCase(
-                fetchPosts.fulfilled,
+                fetchLessons.fulfilled,
                 (state, action: PayloadAction<Post[]>) => {
                     state.loading = false;
                     state.posts = action.payload;
                 },
             )
-            .addCase(fetchPosts.rejected, (state, action) => {
+            .addCase(fetchLessons.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload as string;
             });
     },
 });
 
-export default postsSlice.reducer;
+export default lessonsSlice.reducer;

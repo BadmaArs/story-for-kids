@@ -1,4 +1,4 @@
 import Topic from "./ui/topic";
-import postsSlice from "./model/slice";
+import lessonSlice from "./model/slice";
 
-export { Topic, postsSlice };
+export { Topic, lessonSlice };

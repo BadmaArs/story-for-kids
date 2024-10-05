@@ -1,13 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { counterSlice } from "@/shared/ui/counter";
 import { setupListeners } from "@reduxjs/toolkit/query";
-import { postsSlice } from "@/entities/topic";
+import { lessonSlice } from "@/entities/topic";
 
 export function makeStore() {
     const store = configureStore({
         reducer: {
             count: counterSlice,
-            posts: postsSlice,
+            posts: lessonSlice,
         },
     });
     setupListeners(store.dispatch);

@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { postsApi } from "../api/posts-api";
 
-export const fetchPosts = createAsyncThunk(
+export const fetchLessons = createAsyncThunk(
     "posts/fetchPosts",
     async (_, { rejectWithValue }) => {
         try {

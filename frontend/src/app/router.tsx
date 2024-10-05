@@ -10,7 +10,7 @@ export const router = createBrowserRouter([
             { index: true, element: <App /> },
             { path: "home", element: <App /> },
             { path: "lesson", element: <Lesson /> },
-            { path: "quiz", element: <Quiz /> },
+            { path: "quiz/:topicId", element: <Quiz /> },
         ],
     },
 ]);
