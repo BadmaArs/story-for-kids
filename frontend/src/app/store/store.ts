@@ -3,13 +3,15 @@ import { counterSlice } from "@/shared/ui/counter";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { lessonSlice } from "@/entities/topic";
 import { slideSlice } from "@/entities/slide";
+import { indexSlideSlice } from "@/features/quiz-navigation";
 
 export function makeStore() {
     const store = configureStore({
         reducer: {
             count: counterSlice,
             lesson: lessonSlice,
-            quiz: slideSlice
+            quiz: slideSlice,
+            indexCurrentSlide: indexSlideSlice,
         },
     });
     setupListeners(store.dispatch);

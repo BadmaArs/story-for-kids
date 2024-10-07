@@ -1,14 +1,16 @@
-import { useAppSelector } from "@/app/hooks@depercated";
+import { useAppDispatch, useAppSelector } from "@/app/hooks@depercated";
 import { selectSlide } from "@/entities/slide";
 import { QuizData, Slide } from "@/entities/slide-content-type";
+import { selectIndexCurrentSlide } from "@/features/quiz-navigation";
+import { setIndexCurrentSlide } from "@/features/quiz-navigation/model/slice";
 import { Next, Prev } from "@/shared/ui/kbd";
 import { Content } from "@/widgets/content";
 import { TopBarPanel } from "@/widgets/top-bar-panel";
-import { useState } from "react";
 
 const Quiz = () => {
+    const dispatch = useAppDispatch();
     const currentQuiz = useAppSelector(selectSlide);
-    const [currentSlideIndex, setCurrentSlideIndex] = useState<number>(0);
+    const currentSlideIndex = useAppSelector(selectIndexCurrentSlide);
 
     const newSlides: Slide[] = [
         {
@@ -50,13 +52,21 @@ const Quiz = () => {
 
     const handleNext = () => {
         if (currentSlideIndex < extendedQuiz.slides.length - 1) {
-            setCurrentSlideIndex(currentSlideIndex + 1);
+            dispatch(
+                setIndexCurrentSlide({
+                    indexCurrentSlide: currentSlideIndex + 1,
+                }),
+            );
         }
     };
 
     const handlePrev = () => {
         if (currentSlideIndex > 0) {
-            setCurrentSlideIndex(currentSlideIndex - 1);
+            dispatch(
+                setIndexCurrentSlide({
+                    indexCurrentSlide: currentSlideIndex - 1,
+                }),
+            );
         }
     };
 
