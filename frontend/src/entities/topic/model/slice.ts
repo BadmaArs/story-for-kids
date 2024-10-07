@@ -1,21 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { fetchLessons } from "./thunks";
+import { LessonsState, Lesson } from "./types";
 
-interface Post {
-    id: number;
-    title: string;
-    body: string;
-}
-interface LessonsState {
-    posts: Post[];
-    loading: boolean;
-    error: string | null;
-}
-const initialState: LessonsState = {
-    posts: [],
+export const initialState: LessonsState = {
+    lessons: [],
     loading: false,
     error: null,
 };
+
 const lessonsSlice = createSlice({
     name: "posts",
     initialState,
@@ -28,9 +20,9 @@ const lessonsSlice = createSlice({
             })
             .addCase(
                 fetchLessons.fulfilled,
-                (state, action: PayloadAction<Post[]>) => {
+                (state, action: PayloadAction<Lesson[]>) => {
                     state.loading = false;
-                    state.posts = action.payload;
+                    state.lessons = action.payload;
                 },
             )
             .addCase(fetchLessons.rejected, (state, action) => {
