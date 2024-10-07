@@ -12,8 +12,6 @@ interface Props {
 }
 
 const Content: React.FC<Props> = ({ slide }) => {
-    console.log(slide);
-
     const renderContent = () => {
         switch (slide.type_slide) {
             case "image-text":
