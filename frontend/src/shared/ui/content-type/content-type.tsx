@@ -189,9 +189,9 @@ export const ContentQuiz = () => {
                                 <input
                                     type="radio"
                                     name={`radio-${questionIndex}`}
-                                    className={`radio checked:bg-stone-600 ${checkAnswer && option === q.correctAnswer ? "bg-green-500" : ""}
+                                    className={`radio ${checkAnswer && option === q.correctAnswer ? "checked:bg-green-500" : "checked:bg-stone-500"} ${checkAnswer && option === q.correctAnswer ? "bg-green-500" : ""}
 
-                                    ${checkAnswer && option === q.correctAnswer ? "checked:bg-green-500" : ""}
+                                    
                                     `}
                                     disabled={checkAnswer}
                                     onChange={() => setSelectedOption(option)}

@@ -14,7 +14,7 @@ const Topic = () => {
     const dispatch = useAppDispatch();
     const { lessons } = useSelector(selectLesson);
     const [lesson, setLesson] = useState<Lesson | null>(null);
-
+    console.log(lessons);
     useEffect(() => {
         dispatch(fetchLessons());
     }, [dispatch]);
