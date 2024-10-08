@@ -2,6 +2,8 @@ import { Steps } from "@/entities/steps";
 import { Bookmark } from "@/features/bookmark";
 import { ToReturn } from "@/shared/ui/to-return";
 
+// В этом компоненте собираются все элементы топ бар в quiz/:id
+
 const TopBarPanel = () => {
     return (
         <>

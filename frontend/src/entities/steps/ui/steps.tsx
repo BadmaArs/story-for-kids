@@ -3,6 +3,9 @@ import { selectSlide } from "@/entities/slide";
 import { selectIndexCurrentSlide } from "@/features/quiz-navigation";
 import { setIndexCurrentSlide } from "@/features/quiz-navigation/model/slice";
 
+// Топ бар панель для навигации по слайдам
+// Изменяет состояние индекса в store
+
 const Steps = () => {
     const dispatch = useAppDispatch();
     const currentQuiz = useAppSelector(selectSlide);
@@ -28,6 +31,3 @@ const Steps = () => {
     );
 };
 export default Steps;
-
-//   <button className="join-item btn btn-lg btn-active">2</button>
-//   Активный элемент

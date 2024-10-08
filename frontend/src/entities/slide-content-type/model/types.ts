@@ -1,8 +1,14 @@
+interface Question {
+    question: string;
+    options: string[];
+    correctAnswer: string;
+}
+
 export interface Slide {
     type_slide: string;
-    type_content: string[];
-    text: string;
-    img: string;
+    text?: string;
+    media?: string;
+    questions?: Question[] | null;
 }
 
 export interface QuizData {

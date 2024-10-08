@@ -6,6 +6,10 @@ import { Next, Prev } from "@/shared/ui/kbd";
 import { Content } from "@/widgets/content";
 import { TopBarPanel } from "@/widgets/top-bar-panel";
 
+// Страница Quiz
+// Кнопки Prev и Next изменяют индекс который хранится в store
+// В Content передаются данные о информации текущего слайда currentQuiz.slides[currentSlideIndex], получение с помощью индекса
+
 const Quiz = () => {
     const dispatch = useAppDispatch();
     const currentQuiz = useAppSelector(selectSlide);

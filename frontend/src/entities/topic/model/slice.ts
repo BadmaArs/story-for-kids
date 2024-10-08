@@ -2,6 +2,8 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { fetchLessons } from "./thunks";
 import { LessonsState, Lesson } from "./types";
 
+// Приходят данные с JSON placeholder получаем список тем уроков, при связке с беком подставить свои данные
+
 export const initialState: LessonsState = {
     lessons: [],
     loading: false,

@@ -1,6 +1,9 @@
 import { useState } from "react";
 import ReactPlayer from "react-player";
 
+// Отображаемый контент слайда, в внутри quiz/:id
+// Данные в поля будут приходить с сервера, они должны извлекаться из store
+
 export const ContentImage = () => {
     return (
         <div className="flex w-full flex-col border-opacity-50">
@@ -168,10 +171,8 @@ const questions: Question[] = [
 export const ContentQuiz = () => {
     const [checkAnswer, setCheckAnswer] = useState<boolean>(false);
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
-
     const disableAllOptions = () => {
         setCheckAnswer(true);
-        console.log(checkAnswer);
     };
 
     return (
@@ -208,5 +209,3 @@ export const ContentQuiz = () => {
         </div>
     );
 };
-
-// https://videocdn.cdnpk.net/videos/fd7e918a-0d3b-4c38-ad02-f07d8435f8ad/horizontal/previews/clear/large.mp4?token=exp=1728034634~hmac=da6d2db521d70abf34beae6d28fac39e558162a6b9858c5ac9019416d59c7315

@@ -2,6 +2,9 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { CurrentQuiz } from "./types";
 import { Lesson } from "@/entities/topic/model/types";
 
+// Моковоые данные которые будут приходить из сервера, изначальный их state должен быть null
+// state получает данные о текущей теме урока, изменяется при переходе на новую тему
+
 const initialState: CurrentQuiz = {
     currentQuiz: {
         id: null,
@@ -11,33 +14,66 @@ const initialState: CurrentQuiz = {
     slides: [
         {
             type_slide: "image-text",
-            type_content: ["image", "image_and_text", "text"],
             text: "asd",
-            img: "nameImage1",
+            media: "nameImage1",
+            questions: null,
         },
         {
             type_slide: "text",
-            type_content: ["image", "image_and_text", "text"],
             text: "asd",
-            img: "nameImage2",
+            media: "nameImage2",
+            questions: null,
         },
         {
             type_slide: "image",
-            type_content: ["image", "image_and_text", "text"],
             text: "asd",
-            img: "nameImage3",
+            media: "nameImage3",
+            questions: null,
         },
         {
             type_slide: "video",
-            type_content: ["image", "image_and_text", "text"],
             text: "asd",
-            img: "nameImage4",
+            media: "nameImage4",
+            questions: null,
         },
         {
             type_slide: "video-text",
-            type_content: ["image", "image_and_text", "text"],
             text: "asd",
-            img: "nameImage5",
+            media: "nameImage5",
+            questions: null,
+        },
+        {
+            type_slide: "questions",
+            text: "Вопросы",
+            questions: [
+                {
+                    question: "Какой язык используется для веб-разработки?",
+                    options: ["HTML", "Python", "Java", "C++", "Ruby"],
+                    correctAnswer: "HTML",
+                },
+                {
+                    question: "Что такое React?",
+                    options: [
+                        "Библиотека",
+                        "Язык программирования",
+                        "Фреймворк",
+                        "Система управления базами данных",
+                        "Операционная система",
+                    ],
+                    correctAnswer: "Библиотека",
+                },
+                {
+                    question: "Что такое Redux?",
+                    options: [
+                        "База данных",
+                        "Менеджер состояния",
+                        "Сервер",
+                        "Язык программирования",
+                        "Фреймворк",
+                    ],
+                    correctAnswer: "Менеджер состояния",
+                },
+            ],
         },
     ],
 };

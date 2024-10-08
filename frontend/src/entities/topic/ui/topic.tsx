@@ -7,6 +7,9 @@ import { selectLesson } from "../model/selectors";
 import { Lesson } from "../model/types";
 import { setQuiz } from "@/entities/slide/model/slice";
 
+// При переходе в новую тему lesson получает новые данные и отправляет в store текущую тему
+// lessons получает темы уроков на странице "lesson"
+
 const Topic = () => {
     const dispatch = useAppDispatch();
     const { lessons } = useSelector(selectLesson);
@@ -20,7 +23,6 @@ const Topic = () => {
         setLesson(lesson);
         dispatch(setQuiz(lesson));
     };
-
     return (
         <>
             {lessons.map((lesson, index) => (
