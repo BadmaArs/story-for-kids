@@ -10,14 +10,14 @@ const Steps = () => {
     const handleSetIndex = (index: number) => {
         dispatch(setIndexCurrentSlide({ indexCurrentSlide: index }));
     };
-    console.log(currentSlideIndex);
+
     return (
         <div className="flex py-3 overflow-x-auto md:py-10 gap-3 md:gap-5">
             <div className="join">
                 {currentQuiz.slides.map((_, index) => (
                     <button
                         key={index}
-                        className="join-item btn btn-lg"
+                        className={`join-item btn btn-lg ${currentSlideIndex === index ? "btn-active" : ""}`}
                         onClick={() => handleSetIndex(index)}
                     >
                         {index + 1}
