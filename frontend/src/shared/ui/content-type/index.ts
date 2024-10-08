@@ -4,6 +4,7 @@ import {
     ContentText,
     ContentVideo,
     ContentVideoAndText,
+    ContentQuiz,
 } from "./content-type";
 
 export {
@@ -12,4 +13,5 @@ export {
     ContentText,
     ContentVideo,
     ContentVideoAndText,
+    ContentQuiz,
 };

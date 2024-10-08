@@ -128,4 +128,12 @@ export const ContentText = () => {
     );
 };
 
+export const ContentQuiz = () => {
+    return (
+        <div className="">
+            <div className="">asd</div>
+        </div>
+    );
+};
+
 // https://videocdn.cdnpk.net/videos/fd7e918a-0d3b-4c38-ad02-f07d8435f8ad/horizontal/previews/clear/large.mp4?token=exp=1728034634~hmac=da6d2db521d70abf34beae6d28fac39e558162a6b9858c5ac9019416d59c7315
