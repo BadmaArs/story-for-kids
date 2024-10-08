@@ -1,3 +1,4 @@
+import { useState } from "react";
 import ReactPlayer from "react-player";
 
 export const ContentImage = () => {
@@ -128,10 +129,79 @@ export const ContentText = () => {
     );
 };
 
+interface Question {
+    question: string;
+    options: string[];
+    correctAnswer: string;
+}
+
+const questions: Question[] = [
+    {
+        question: "Какой язык используется для веб-разработки?",
+        options: ["HTML", "Python", "Java", "C++", "Ruby"],
+        correctAnswer: "HTML",
+    },
+    {
+        question: "Что такое React?",
+        options: [
+            "Библиотека",
+            "Язык программирования",
+            "Фреймворк",
+            "Система управления базами данных",
+            "Операционная система",
+        ],
+        correctAnswer: "Библиотека",
+    },
+    {
+        question: "Что такое Redux?",
+        options: [
+            "База данных",
+            "Менеджер состояния",
+            "Сервер",
+            "Язык программирования",
+            "Фреймворк",
+        ],
+        correctAnswer: "Менеджер состояния",
+    },
+];
+
 export const ContentQuiz = () => {
+    const [checkAnswer, setCheckAnswer] = useState<boolean>(false);
+    const [selectedOption, setSelectedOption] = useState<string | null>(null);
+
+    const disableAllOptions = () => {
+        setCheckAnswer(true);
+        console.log(checkAnswer);
+    };
+
     return (
-        <div className="">
-            <div className="">asd</div>
+        <div className="border border-black w-full rounded-md md:w-1/3 px-3 py-3 text-lg">
+            {questions.map((q, questionIndex) => (
+                <div key={questionIndex} className="mb-5 border-b border-black">
+                    <h1 className="mb-3">{q.question}</h1>
+                    {q.options.map((option, index) => (
+                        <div className="form-control" key={index}>
+                            <label className="label cursor-pointer">
+                                <span className="label-text text-lg">
+                                    {option}
+                                </span>
+                                <input
+                                    type="radio"
+                                    name={`radio-${questionIndex}`}
+                                    className={`radio checked:bg-brown-100 ${checkAnswer && option === q.correctAnswer ? "bg-green-500" : ""}`}
+                                    disabled={checkAnswer}
+                                    onChange={() => setSelectedOption(option)}
+                                />
+                            </label>
+                        </div>
+                    ))}
+                </div>
+            ))}
+            <div className="flex justify-end">
+                <button className="btn" onClick={disableAllOptions}>
+                    Проверить
+                </button>
+            </div>
         </div>
     );
 };
