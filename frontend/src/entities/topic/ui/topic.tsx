@@ -1,43 +1,38 @@
-import { useAppDispatch } from "@/app/hooks@depercated";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { fetchLessons } from "../model/thunks";
-import { selectLesson } from "../model/selectors";
 import { Lesson } from "../model/types";
 import { setQuiz } from "@/entities/slide/model/slice";
-
-// При переходе в новую тему lesson получает новые данные и отправляет в store текущую тему
-// lessons получает темы уроков на странице "lesson"
+import { useGetPostsQuery } from "../api/posts-api";
+import { useAppDispatch } from "@/app/hooks@depercated";
 
 const Topic = () => {
     const dispatch = useAppDispatch();
-    const { lessons } = useSelector(selectLesson);
+    const { data: lessons, isLoading, error } = useGetPostsQuery();
     const [lesson, setLesson] = useState<Lesson | null>(null);
-    console.log(lessons);
-    useEffect(() => {
-        dispatch(fetchLessons());
-    }, [dispatch]);
+
+    if (isLoading)
+        return (
+            <div className="h-screen w-screen flex absolute bg-white bg-opacity-70 justify-center items-center">
+                <span className="loading loading-spinner loading-lg"></span>;
+            </div>
+        );
+    if (error) return <div>Error occurred</div>;
+    if (!lessons || lessons.length === 0) return <div>No lessons found</div>;
 
     const handleSlide = (lesson: Lesson) => {
         setLesson(lesson);
         dispatch(setQuiz(lesson));
     };
+
     return (
         <>
             {lessons.map((lesson, index) => (
                 <Link
                     to={`/quiz/${lesson.id}`}
-                    key={index}
+                    key={lesson.id}
                     onClick={() => handleSlide(lesson)}
                 >
-                    <div
-                        key={index}
-                        className="flex justify-center items-center w-full"
-                    >
-                        {/* <span className="text-brown-100 text-lg md:text-3xl font-bold p-2 rounded text-center">
-                            Тема {index + 1}
-                        </span> */}
+                    <div className="flex justify-center items-center w-full">
                         <button className="btn btn-lg w-full">
                             Тема {index + 1}
                         </button>
@@ -50,4 +45,5 @@ const Topic = () => {
         </>
     );
 };
+
 export default Topic;

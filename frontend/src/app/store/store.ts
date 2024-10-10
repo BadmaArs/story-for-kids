@@ -1,18 +1,20 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { counterSlice } from "@/shared/ui/counter";
 import { setupListeners } from "@reduxjs/toolkit/query";
-import { lessonSlice } from "@/entities/topic";
 import { slideSlice } from "@/entities/slide";
 import { indexSlideSlice } from "@/features/quiz-navigation";
+import { postsApi } from "@/entities/topic/api/posts-api";
 
 export function makeStore() {
     const store = configureStore({
         reducer: {
             count: counterSlice,
-            lesson: lessonSlice,
             quiz: slideSlice,
             indexCurrentSlide: indexSlideSlice,
+            [postsApi.reducerPath]: postsApi.reducer,
         },
+        middleware: (getDefaultMiddleware) =>
+            getDefaultMiddleware().concat(postsApi.middleware),
     });
     setupListeners(store.dispatch);
 
