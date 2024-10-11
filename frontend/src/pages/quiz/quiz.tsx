@@ -5,6 +5,8 @@ import { setIndexCurrentSlide } from "@/features/quiz-navigation/model/slice";
 import { Next, Prev } from "@/shared/ui/kbd";
 import { Content } from "@/widgets/content";
 import { TopBarPanel } from "@/widgets/top-bar-panel";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 // Страница Quiz
 // Кнопки Prev и Next изменяют индекс который хранится в store
@@ -14,6 +16,13 @@ const Quiz = () => {
     const dispatch = useAppDispatch();
     const currentQuiz = useAppSelector(selectSlide);
     const currentSlideIndex = useAppSelector(selectIndexCurrentSlide);
+    const navigate = useNavigate();
+    
+    useEffect(() => {
+        if (currentQuiz.currentQuiz.id === null) {
+            navigate("/lesson");
+        }
+    }, []);
 
     const handleNext = () => {
         if (currentSlideIndex < currentQuiz.slides.length - 1) {
@@ -34,7 +43,6 @@ const Quiz = () => {
             );
         }
     };
-
     return (
         <div className="">
             <TopBarPanel />

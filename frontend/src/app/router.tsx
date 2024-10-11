@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Layout } from "./layout";
-import { App, Lesson, Quiz } from "@/pages";
+import { App, Bookmarks, Lesson, Quiz } from "@/pages";
 
 export const router = createBrowserRouter([
     {
@@ -11,6 +11,7 @@ export const router = createBrowserRouter([
             { path: "home", element: <App /> },
             { path: "lesson", element: <Lesson /> },
             { path: "quiz/:topicId", element: <Quiz /> },
+            { path: "bookmarks", element: <Bookmarks /> },
         ],
     },
 ]);

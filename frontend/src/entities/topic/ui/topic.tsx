@@ -39,9 +39,6 @@ const Topic = () => {
                     </div>
                 </Link>
             ))}
-            <div className="flex justify-center items-center">
-                <button className="btn btn-lg w-full">Закладки</button>
-            </div>
         </>
     );
 };
