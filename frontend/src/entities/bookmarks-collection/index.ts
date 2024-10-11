@@ -1,5 +1,5 @@
 import BookmarksCollection from "./ui/bookmarks-collection";
-import bookmarkSlide from "./model/slice";
+import bookmarkSlice from "./model/slice";
 import { selectBookmark } from "./model/selectors";
 
-export { BookmarksCollection, bookmarkSlide, selectBookmark };
+export { BookmarksCollection, bookmarkSlice, selectBookmark };

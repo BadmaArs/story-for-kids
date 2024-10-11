@@ -9,7 +9,7 @@ const BookmarksCollection = () => {
     } else {
         return (
             <div className="">
-                {bookmarks.map((item, index) => (
+                {/* {bookmarks.map((item, index) => (
                     <ul className="list-disc ml-5 md:ml-10 text-lg" key={index}>
                         <li>
                             <a href={item.link}>
@@ -20,7 +20,7 @@ const BookmarksCollection = () => {
                             </a>
                         </li>
                     </ul>
-                ))}
+                ))} */}
             </div>
         );
     }

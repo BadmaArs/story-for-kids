@@ -5,7 +5,7 @@ const initialState: BookmarkMaterialArray = {
     bookmarkMaterials: [],
 };
 
-const bookmarkSlide = createSlice({
+const bookmarkSlice = createSlice({
     name: "bookmark",
     initialState,
     reducers: {
@@ -15,5 +15,5 @@ const bookmarkSlide = createSlice({
     },
 });
 
-export const { addNewBookmark } = bookmarkSlide.actions;
-export default bookmarkSlide.reducer;
+export const { addNewBookmark } = bookmarkSlice.actions;
+export default bookmarkSlice.reducer;

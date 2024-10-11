@@ -4,7 +4,7 @@ import { setupListeners } from "@reduxjs/toolkit/query";
 import { slideSlice } from "@/entities/slide";
 import { indexSlideSlice } from "@/features/quiz-navigation";
 import { postsApi } from "@/entities/topic/api/posts-api";
-import { bookmarkSlide } from "@/entities/bookmarks-collection";
+import { bookmarkSlice } from "@/entities/bookmarks-collection";
 
 export function makeStore() {
     const store = configureStore({
@@ -13,7 +13,7 @@ export function makeStore() {
             quiz: slideSlice,
             indexCurrentSlide: indexSlideSlice,
             [postsApi.reducerPath]: postsApi.reducer,
-            bookmark: bookmarkSlide,
+            bookmark: bookmarkSlice,
         },
         middleware: (getDefaultMiddleware) =>
             getDefaultMiddleware().concat(postsApi.middleware),
