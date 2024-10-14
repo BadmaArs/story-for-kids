@@ -1,3 +1,3 @@
 import Books from "./ui/books";
-
-export { Books };
+import { booksApi } from "./api/api-books";
+export { Books, booksApi };

@@ -1,4 +1,4 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"; 
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { Lesson } from "../model/types";
 
 export const postsApi = createApi({
@@ -7,10 +7,12 @@ export const postsApi = createApi({
         baseUrl: "https://jsonplaceholder.typicode.com",
     }),
     endpoints: (builder) => ({
-        getPosts: builder.query<Lesson[], void>({
+        getPosts: builder.query<any[], void>({
             query: () => "/posts",
         }),
     }),
 });
 
 export const { useGetPostsQuery } = postsApi;
+
+// По возможности убрать данный апи

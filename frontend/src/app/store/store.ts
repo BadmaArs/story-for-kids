@@ -5,6 +5,7 @@ import { slideSlice } from "@/entities/slide";
 import { indexSlideSlice } from "@/features/quiz-navigation";
 import { postsApi } from "@/entities/topic/api/posts-api";
 import { bookmarkSlice } from "@/entities/bookmarks-collection";
+import { booksApi } from "@/entities/books";
 
 export function makeStore() {
     const store = configureStore({
@@ -12,11 +13,14 @@ export function makeStore() {
             count: counterSlice,
             quiz: slideSlice,
             indexCurrentSlide: indexSlideSlice,
-            [postsApi.reducerPath]: postsApi.reducer,
             bookmark: bookmarkSlice,
+            [postsApi.reducerPath]: postsApi.reducer,
+            [booksApi.reducerPath]: booksApi.reducer,
         },
         middleware: (getDefaultMiddleware) =>
-            getDefaultMiddleware().concat(postsApi.middleware),
+            getDefaultMiddleware()
+                .concat(postsApi.middleware)
+                .concat(booksApi.middleware),
     });
     setupListeners(store.dispatch);
 

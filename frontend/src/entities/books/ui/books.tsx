@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
+import { useGetBooksQuery } from "../api/api-books";
 
 const Books = () => {
+    const { data: books } = useGetBooksQuery();
+    console.log(books);
     return (
         <>
             <div className=" md:w-1/4 relative border cursor-pointer">
