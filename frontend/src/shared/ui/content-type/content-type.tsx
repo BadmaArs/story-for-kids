@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ReactPlayer from "react-player";
+import "./content-type.css";
 
 // Отображаемый контент слайда, в внутри quiz/:id
 // Данные в поля будут приходить с сервера, они должны извлекаться из store
@@ -182,16 +183,14 @@ export const ContentQuiz = () => {
                     <h1 className="mb-3">{q.question}</h1>
                     {q.options.map((option, index) => (
                         <div className="form-control" key={index}>
-                            <label className="label cursor-pointer">
+                            <label className="label cursor-pointer disabled-label">
                                 <span className="label-text text-lg">
                                     {option}
                                 </span>
                                 <input
                                     type="radio"
                                     name={`radio-${questionIndex}`}
-                                    className={`radio ${checkAnswer && option === q.correctAnswer ? "checked:bg-green-500" : "checked:bg-stone-500"} ${checkAnswer && option === q.correctAnswer ? "bg-green-500" : ""}
-
-                                    
+                                    className={`radio ${checkAnswer && option === q.correctAnswer ? "checked:bg-green-500" : "checked:bg-stone-500"} ${checkAnswer && option === q.correctAnswer ? "bg-green-500" : ""} 
                                     `}
                                     disabled={checkAnswer}
                                     onChange={() => setSelectedOption(option)}

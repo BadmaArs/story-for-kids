@@ -1,0 +1,4 @@
+.disabled-label input[type="radio"] {
+    opacity: 1;
+    pointer-events: none;
+}
