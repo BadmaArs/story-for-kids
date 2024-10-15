@@ -15,12 +15,16 @@ export const booksApi = createApi({
     }),
     endpoints: (builder) => ({
         getBooks: builder.query<any, void>({
-            query: () => "/api/books/1?populate[lesson]=1[slides]",
+            query: () =>
+                "api/slides?filters[lesson][id]=4&sort[1]=number:asc&pagination[page]=0&pagination[pageSize]=1",
         }),
     }),
 });
 
 export const { useGetBooksQuery } = booksApi;
+
+// books
+//
 
 // Получение всех уроков
 // /api/books/1?populate=lessons
@@ -28,4 +32,10 @@ export const { useGetBooksQuery } = booksApi;
 // Получение всех слайдов
 // /api/books/1?populate[lessons][populate]=slides
 
-//
+// Рабочая пагинация
+// /api/slides?pagination[start]=0&pagination[limit]=3
+
+// Пагинация на конкретном уроке
+// /api/slides?filters[lesson]=1&pagination[start]=0&pagination[limit]=1
+
+// /api/books?filters[id]=2 получаю книгу по id

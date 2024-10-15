@@ -2,8 +2,15 @@ import { Link } from "react-router-dom";
 import { useGetBooksQuery } from "../api/api-books";
 
 const Books = () => {
-    const { data: books } = useGetBooksQuery();
-    console.log(books);
+    const { data: books, isLoading } = useGetBooksQuery();
+
+    if (isLoading == true) {
+        return <div className="">Загрузка страницы</div>;
+    } else {
+        console.log(books);
+        // console.log(books.meta.pagination.total);
+    }
+
     return (
         <>
             <div className=" md:w-1/4 relative border cursor-pointer">
