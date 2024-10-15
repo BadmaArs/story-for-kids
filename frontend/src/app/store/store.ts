@@ -3,9 +3,9 @@ import { counterSlice } from "@/shared/ui/counter";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { slideSlice } from "@/entities/slide";
 import { indexSlideSlice } from "@/features/quiz-navigation";
-import { postsApi } from "@/entities/topic/api/posts-api";
 import { bookmarkSlice } from "@/entities/bookmarks-collection";
 import { booksApi } from "@/entities/books";
+import { lessonsApi } from "@/entities/topic/api/lessons-api";
 
 export function makeStore() {
     const store = configureStore({
@@ -14,12 +14,12 @@ export function makeStore() {
             quiz: slideSlice,
             indexCurrentSlide: indexSlideSlice,
             bookmark: bookmarkSlice,
-            [postsApi.reducerPath]: postsApi.reducer,
+            [lessonsApi.reducerPath]: lessonsApi.reducer,
             [booksApi.reducerPath]: booksApi.reducer,
         },
         middleware: (getDefaultMiddleware) =>
             getDefaultMiddleware()
-                .concat(postsApi.middleware)
+                .concat(lessonsApi.middleware)
                 .concat(booksApi.middleware),
     });
     setupListeners(store.dispatch);

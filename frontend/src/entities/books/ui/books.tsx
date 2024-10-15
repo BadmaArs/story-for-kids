@@ -18,7 +18,6 @@ const Books = () => {
         console.error("Invalid data format received from API.");
         return <p>Invalid data format received from API.</p>;
     }
-    console.log(booksData);
     return (
         <>
             {booksData &&

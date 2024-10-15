@@ -1,32 +1,34 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Lesson } from "../model/types";
-import { setQuiz } from "@/entities/slide/model/slice";
-import { useGetPostsQuery } from "../api/posts-api";
-import { useAppDispatch } from "@/app/hooks@depercated";
 import { Loader } from "@/shared/ui/loader";
+import { useGetLessonsQuery } from "../api/lessons-api";
 
 const Topic = () => {
-    const dispatch = useAppDispatch();
-    const { data: lessons, isLoading, error } = useGetPostsQuery();
-    const [lesson, setLesson] = useState<Lesson | null>(null);
+    let bookId: number | null = null;
+    const url = window.location.href;
+    const match = url.match(/\/(\d+)$/);
+
+    if (match) {
+        const lastDigit = match[1];
+        bookId = Number(lastDigit);
+        console.log(lastDigit);
+    }
+
+    const { data: lessons, isLoading, error } = useGetLessonsQuery({ bookId });
 
     if (isLoading) return <Loader />;
     if (error) return <div>Error occurred</div>;
-    if (!lessons || lessons.length === 0) return <div>No lessons found</div>;
+    if (!lessons || lessons.data.lessons.length === 0) return <div>No lessons found</div>;
 
-    const handleSlide = (lesson: Lesson) => {
-        setLesson(lesson);
-        dispatch(setQuiz(lesson));
-    };
+    const lessonsCollection = lessons.data.lessons;
+    console.log(lessons);
 
     return (
         <>
-            {lessons.map((lesson, index) => (
+            {lessonsCollection.map((lesson, index) => (
                 <Link
                     to={`/quiz/${lesson.id}`}
                     key={lesson.id}
-                    onClick={() => handleSlide(lesson)}
+                    // onClick={() => handleSlide(lesson)}
                 >
                     <div className="flex justify-center items-center w-full">
                         <button className="btn btn-lg w-full">
