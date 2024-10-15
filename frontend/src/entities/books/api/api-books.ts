@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { IBook, IBooks } from "../model/types";
 
 const apiToken = import.meta.env.VITE_API_GET_BOOKS_TOKEN;
 
@@ -14,9 +15,8 @@ export const booksApi = createApi({
         },
     }),
     endpoints: (builder) => ({
-        getBooks: builder.query<any, void>({
-            query: () =>
-                "api/slides?filters[lesson][id]=4&sort[1]=number:asc&pagination[page]=0&pagination[pageSize]=1",
+        getBooks: builder.query<IBooks, void>({
+            query: () => "api/books",
         }),
     }),
 });

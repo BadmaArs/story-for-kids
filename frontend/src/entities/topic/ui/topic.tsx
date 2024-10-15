@@ -4,18 +4,14 @@ import { Lesson } from "../model/types";
 import { setQuiz } from "@/entities/slide/model/slice";
 import { useGetPostsQuery } from "../api/posts-api";
 import { useAppDispatch } from "@/app/hooks@depercated";
+import { Loader } from "@/shared/ui/loader";
 
 const Topic = () => {
     const dispatch = useAppDispatch();
     const { data: lessons, isLoading, error } = useGetPostsQuery();
     const [lesson, setLesson] = useState<Lesson | null>(null);
 
-    if (isLoading)
-        return (
-            <div className="h-screen w-screen flex absolute bg-white bg-opacity-70 justify-center items-center">
-                <span className="loading loading-spinner loading-lg"></span>;
-            </div>
-        );
+    if (isLoading) return <Loader />;
     if (error) return <div>Error occurred</div>;
     if (!lessons || lessons.length === 0) return <div>No lessons found</div>;
 
