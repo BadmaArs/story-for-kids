@@ -1,59 +1,68 @@
 import { useState } from "react";
 import ReactPlayer from "react-player";
 import "./content-type.css";
+import { marked } from "marked";
 
-// Отображаемый контент слайда, в внутри quiz/:id
-// Данные в поля будут приходить с сервера, они должны извлекаться из store
+interface Image {
+    url: string;
+}
 
-export const ContentImage = () => {
+interface Slide {
+    id: number;
+    number: number;
+    text: string;
+    type_slide: string;
+    img: Image[];
+}
+
+interface Slides {
+    data: Slide[];
+}
+
+export const ContentImage: React.FC<Slides> = ({ data }) => {
     return (
         <div className="flex w-full flex-col border-opacity-50">
             <div className="card bg-base-300 rounded-box grid h-auto place-items-center">
                 <img
                     alt="Tailwind CSS examples"
-                    src="https://img.freepik.com/free-photo/medium-shot-contemplative-man-seaside_23-2150531618.jpg?t=st=1728028582~exp=1728032182~hmac=5dfd30c964a3dda2deffc8c242514899bc9739f70ffa83c684d8a6870f58591d&w=2000"
+                    src={`https://kalmykhistory.ru/strapi` + data[0].img[0].url}
                 />
             </div>
         </div>
     );
 };
 
-export const ContentTextAndImage = () => {
+export const ContentTextAndImage: React.FC<Slides> = ({ data }) => {
+    const getHTML = () => {
+        const html = marked(data[0].text);
+        return { __html: html };
+    };
     return (
         <>
             <div className="flex w-full flex-col border-opacity-50 md:flex-row md:gap-3">
-                <div className="card bg-base-300 rounded-box grid h-auto place-items-center md:w-1/2">
+                <div className="card bg-base-300 rounded-box grid h-auto place-items-center md:w-1/2 md:px-3">
                     <img
                         alt="Tailwind CSS examples"
-                        src="https://img.freepik.com/free-photo/medium-shot-contemplative-man-seaside_23-2150531618.jpg?t=st=1728028582~exp=1728032182~hmac=5dfd30c964a3dda2deffc8c242514899bc9739f70ffa83c684d8a6870f58591d&w=2000"
+                        src={
+                            `https://kalmykhistory.ru/strapi` +
+                            data[0].img[0].url
+                        }
+                        className="md:w-full md:object-contain"
                     />
                 </div>
                 <div className="divider"></div>
                 <div className="card bg-base-300 rounded-box grid h-auto place-items-center p-2 md:w-1/2">
-                    <p className="text-lg">
-                        Давно выяснено, что при оценке дизайна и композиции
-                        читаемый текст мешает сосредоточиться. Lorem Ipsum
-                        используют потому, что тот обеспечивает более или менее
-                        стандартное заполнение шаблона, а также реальное
-                        распределение букв и пробелов в абзацах, которое не
-                        получается при простой дубликации "Здесь ваш текст..
-                        Здесь ваш текст.. Здесь ваш текст.." Многие программы
-                        электронной вёрстки и редакторы HTML используют Lorem
-                        Ipsum в качестве текста по умолчанию, так что поиск по
-                        ключевым словам "lorem ipsum" сразу показывает, как
-                        много веб-страниц всё ещё дожидаются своего настоящего
-                        рождения. За прошедшие годы текст Lorem Ipsum получил
-                        много версий. Некоторые версии появились по ошибке,
-                        некоторые - намеренно (например, юмористические
-                        варианты).
-                    </p>
+                    <div
+                        className="text-lg"
+                        dangerouslySetInnerHTML={getHTML()}
+                    ></div>
                 </div>
             </div>
         </>
     );
 };
 
-export const ContentVideo = () => {
+export const ContentVideo: React.FC<Slides> = ({ data }) => {
     return (
         <div className="flex w-full flex-col justify-center md:flex-row md:gap-3">
             <div className="card w-full bg-base-300 rounded-box grid h-auto place-items-center p-2">
@@ -70,7 +79,7 @@ export const ContentVideo = () => {
     );
 };
 
-export const ContentVideoAndText = () => {
+export const ContentVideoAndText: React.FC<Slides> = ({ data }) => {
     return (
         <>
             <div className="flex w-full flex-col border-opacity-50 md:flex-row md:gap-3">
@@ -109,27 +118,23 @@ export const ContentVideoAndText = () => {
     );
 };
 
-export const ContentText = () => {
+export const ContentText: React.FC<Slides> = ({ data }) => {
+    const getHTML = () => {
+        const html = marked(data[0].text);
+        return { __html: html };
+    };
+
     return (
-        <div className="flex w-full flex-col border-opacity-50 md:flex-row md:gap-3">
-            <div className="card bg-base-300 rounded-box grid h-auto place-items-center p-2">
-                <p className="text-lg">
-                    Давно выяснено, что при оценке дизайна и композиции читаемый
-                    текст мешает сосредоточиться. Lorem Ipsum используют потому,
-                    что тот обеспечивает более или менее стандартное заполнение
-                    шаблона, а также реальное распределение букв и пробелов в
-                    абзацах, которое не получается при простой дубликации "Здесь
-                    ваш текст.. Здесь ваш текст.. Здесь ваш текст.." Многие
-                    программы электронной вёрстки и редакторы HTML используют
-                    Lorem Ipsum в качестве текста по умолчанию, так что поиск по
-                    ключевым словам "lorem ipsum" сразу показывает, как много
-                    веб-страниц всё ещё дожидаются своего настоящего рождения.
-                    За прошедшие годы текст Lorem Ipsum получил много версий.
-                    Некоторые версии появились по ошибке, некоторые - намеренно
-                    (например, юмористические варианты).
-                </p>
+        <>
+            <div className="flex w-full flex-col border-opacity-50 md:flex-row md:gap-3">
+                <div className="card bg-base-300 rounded-box grid h-auto place-items-center p-2">
+                    <div
+                        dangerouslySetInnerHTML={getHTML()}
+                        className="text-lg"
+                    />
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 
@@ -169,7 +174,7 @@ const questions: Question[] = [
     },
 ];
 
-export const ContentQuiz = () => {
+export const ContentQuiz: React.FC<Slides> = ({ data }) => {
     const [checkAnswer, setCheckAnswer] = useState<boolean>(false);
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
     const disableAllOptions = () => {

@@ -1,52 +1,56 @@
-import { useAppDispatch, useAppSelector } from "@/app/hooks@depercated";
-import { selectSlide } from "@/entities/slide";
-import { selectIndexCurrentSlide } from "@/features/quiz-navigation";
-import { setIndexCurrentSlide } from "@/features/quiz-navigation/model/slice";
+import { useEffect } from "react";
 import { Next, Prev } from "@/shared/ui/kbd";
 import { Content } from "@/widgets/content";
 import { TopBarPanel } from "@/widgets/top-bar-panel";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-
-// Страница Quiz
-// Кнопки Prev и Next изменяют индекс который хранится в store
-// В Content передаются данные о информации текущего слайда currentQuiz.slides[currentSlideIndex], получение с помощью индекса
+import { useGetSlidesQuery } from "./api/slides-api";
+import { useAppDispatch, useAppSelector } from "@/app/hooks@depercated";
+import { selectIndexSlide } from "@/features/quiz-navigation";
+import {
+    setIndexCurrentLesson,
+    setIndexCurrentSlide,
+} from "@/features/quiz-navigation/model/slice";
 
 const Quiz = () => {
     const dispatch = useAppDispatch();
-    const currentQuiz = useAppSelector(selectSlide);
-    const currentSlideIndex = useAppSelector(selectIndexCurrentSlide);
-    const navigate = useNavigate();
-    
+    const indexCurrentSlide = useAppSelector(selectIndexSlide);
+    const url = window.location.href;
+
+    const parts = url.split("/");
+    const lessonId = Number(parts[parts.indexOf("quiz") + 1]);
+
     useEffect(() => {
-        if (currentQuiz.currentQuiz.id === null) {
-            navigate("/lesson");
-        }
-    }, []);
+        dispatch(setIndexCurrentLesson(lessonId));
+    }, [lessonId, dispatch]);
+
+    const {
+        data: slides,
+        isLoading,
+        error,
+    } = useGetSlidesQuery({
+        lessonId,
+        slideIdx: indexCurrentSlide,
+    });
 
     const handleNext = () => {
-        if (currentSlideIndex < currentQuiz.slides.length - 1) {
-            dispatch(
-                setIndexCurrentSlide({
-                    indexCurrentSlide: currentSlideIndex + 1,
-                }),
-            );
+        if (slides && indexCurrentSlide < slides.meta.pagination.total) {
+            dispatch(setIndexCurrentSlide(indexCurrentSlide + 1));
         }
     };
 
     const handlePrev = () => {
-        if (currentSlideIndex > 0) {
-            dispatch(
-                setIndexCurrentSlide({
-                    indexCurrentSlide: currentSlideIndex - 1,
-                }),
-            );
+        if (indexCurrentSlide > 0) {
+            dispatch(setIndexCurrentSlide(indexCurrentSlide - 1));
         }
     };
+
+    if (isLoading) return <div>Загрузка...</div>;
+    if (error) return <div>Произошла ошибка</div>;
+    if (!slides) return <div>Слайды не найдены</div>;
+    
     return (
         <div className="">
-            <TopBarPanel />
-            <Content slide={currentQuiz.slides[currentSlideIndex]} />
+            <TopBarPanel total={slides.meta.pagination.total}/>
+            <Content data={slides.data}/>
             <div className="flex justify-center gap-10 py-3">
                 <Prev onClick={handlePrev} />
                 <Next onClick={handleNext} />

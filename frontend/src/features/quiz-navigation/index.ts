@@ -1,4 +1,4 @@
-import indexSlideSlice from "./model/slice";
-import { selectIndexCurrentSlide } from "./model/selectors";
+import indexLessonAndSlideSlice from "./model/slice";
+import { selectIndexLesson, selectIndexSlide } from "./model/selectors";
 
-export { indexSlideSlice, selectIndexCurrentSlide };
+export { indexLessonAndSlideSlice, selectIndexLesson, selectIndexSlide };

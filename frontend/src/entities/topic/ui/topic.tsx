@@ -1,35 +1,40 @@
 import { Link } from "react-router-dom";
 import { Loader } from "@/shared/ui/loader";
 import { useGetLessonsQuery } from "../api/lessons-api";
+import { useAppDispatch, useAppSelector } from "@/app/hooks@depercated";
+import { setIndexCurrentBook } from "@/features/quiz-navigation/model/slice";
+import { selectIndexBook } from "@/features/quiz-navigation/model/selectors";
+import { useEffect } from "react";
 
 const Topic = () => {
-    let bookId: number | null = null;
+    const dispatch = useAppDispatch();
+    const bookId = useAppSelector(selectIndexBook);
     const url = window.location.href;
-    const match = url.match(/\/(\d+)$/);
 
-    if (match) {
-        const lastDigit = match[1];
-        bookId = Number(lastDigit);
-        console.log(lastDigit);
-    }
+    useEffect(() => {
+        const match = url.match(/\/(\d+)$/);
+        if (match) {
+            const bookIdFromUrl = Number(match[1]);
+            dispatch(setIndexCurrentBook(bookIdFromUrl));
+        }
+    }, [url, dispatch]);
 
-    const { data: lessons, isLoading, error } = useGetLessonsQuery({ bookId });
+    const {
+        data: lessons,
+        isLoading,
+        error,
+    } = useGetLessonsQuery({ bookId }, { skip: !bookId });
 
     if (isLoading) return <Loader />;
-    if (error) return <div>Error occurred</div>;
-    if (!lessons || lessons.data.lessons.length === 0) return <div>No lessons found</div>;
+    if (error) return <div>Произошла ошибка</div>;
+    if (!lessons?.data?.lessons?.length) return <div>Уроки не найдены</div>;
 
     const lessonsCollection = lessons.data.lessons;
-    console.log(lessons);
 
     return (
         <>
             {lessonsCollection.map((lesson, index) => (
-                <Link
-                    to={`/quiz/${lesson.id}`}
-                    key={lesson.id}
-                    // onClick={() => handleSlide(lesson)}
-                >
+                <Link to={`/quiz/${lesson.id}`} key={lesson.id}>
                     <div className="flex justify-center items-center w-full">
                         <button className="btn btn-lg w-full">
                             Тема {index + 1}

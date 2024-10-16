@@ -1,4 +1,10 @@
 import { RootState } from "@/app/store";
 
-export const selectIndexCurrentSlide = (state: RootState) =>
-    state.indexCurrentSlide.indexCurrentSlide;
+export const selectIndexLesson = (state: RootState) =>
+    state.indexCurrentLessonAndSlide.indexCurrentLesson;
+
+export const selectIndexSlide = (state: RootState) =>
+    state.indexCurrentLessonAndSlide.indexCurrentSlide;
+
+export const selectIndexBook = (state: RootState) =>
+    state.indexCurrentLessonAndSlide.indexCurrentBook;

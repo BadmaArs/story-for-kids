@@ -4,21 +4,35 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface IndexCurrentSlide {
     indexCurrentSlide: number;
+    indexCurrentLesson: number;
+    indexCurrentBook: number;
 }
 
 const initialState: IndexCurrentSlide = {
-    indexCurrentSlide: 0,
+    indexCurrentSlide: 1,
+    indexCurrentLesson: 0,
+    indexCurrentBook: 0,
 };
 
-const indexSlideSlice = createSlice({
+const indexLessonAndSlideSlice = createSlice({
     name: "current-slice",
     initialState,
     reducers: {
-        setIndexCurrentSlide(state, actions: PayloadAction<IndexCurrentSlide>) {
-            state.indexCurrentSlide = actions.payload.indexCurrentSlide;
+        setIndexCurrentSlide(state, actions: PayloadAction<number>) {
+            state.indexCurrentSlide = actions.payload;
+        },
+        setIndexCurrentLesson(state, actions: PayloadAction<number>) {
+            state.indexCurrentLesson = actions.payload;
+        },
+        setIndexCurrentBook(state, actions: PayloadAction<number>) {
+            state.indexCurrentBook = actions.payload;
         },
     },
 });
 
-export const { setIndexCurrentSlide } = indexSlideSlice.actions;
-export default indexSlideSlice.reducer;
+export const {
+    setIndexCurrentSlide,
+    setIndexCurrentLesson,
+    setIndexCurrentBook,
+} = indexLessonAndSlideSlice.actions;
+export default indexLessonAndSlideSlice.reducer;
