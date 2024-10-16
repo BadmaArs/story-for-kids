@@ -9,6 +9,7 @@ import {
     setIndexCurrentLesson,
     setIndexCurrentSlide,
 } from "@/features/quiz-navigation/model/slice";
+import { Loader } from "@/shared/ui/loader";
 
 const Quiz = () => {
     const dispatch = useAppDispatch();
@@ -43,14 +44,14 @@ const Quiz = () => {
         }
     };
 
-    if (isLoading) return <div>Загрузка...</div>;
+    if (isLoading) return <Loader />;
     if (error) return <div>Произошла ошибка</div>;
     if (!slides) return <div>Слайды не найдены</div>;
-    
+
     return (
         <div className="">
-            <TopBarPanel total={slides.meta.pagination.total}/>
-            <Content data={slides.data}/>
+            <TopBarPanel total={slides.meta.pagination.total} />
+            <Content data={slides.data} />
             <div className="flex justify-center gap-10 py-3">
                 <Prev onClick={handlePrev} />
                 <Next onClick={handleNext} />

@@ -47,13 +47,13 @@ export const ContentTextAndImage: React.FC<Slides> = ({ data }) => {
                             `https://kalmykhistory.ru/strapi` +
                             data[0].img[0].url
                         }
-                        className="md:w-full md:object-contain"
+                        className="md:w-full md:max-h-96 md:object-contain"
                     />
                 </div>
                 <div className="divider"></div>
                 <div className="card bg-base-300 rounded-box grid h-auto place-items-center p-2 md:w-1/2">
                     <div
-                        className="text-lg"
+                        className="text-2xl"
                         dangerouslySetInnerHTML={getHTML()}
                     ></div>
                 </div>
@@ -95,7 +95,7 @@ export const ContentVideoAndText: React.FC<Slides> = ({ data }) => {
                 </div>
                 <div className="divider"></div>
                 <div className="card bg-base-300 rounded-box grid h-auto place-items-center p-2 md:w-1/2">
-                    <p className="text-lg">
+                    <p className="text-2xl">
                         Давно выяснено, что при оценке дизайна и композиции
                         читаемый текст мешает сосредоточиться. Lorem Ipsum
                         используют потому, что тот обеспечивает более или менее
@@ -130,7 +130,7 @@ export const ContentText: React.FC<Slides> = ({ data }) => {
                 <div className="card bg-base-300 rounded-box grid h-auto place-items-center p-2">
                     <div
                         dangerouslySetInnerHTML={getHTML()}
-                        className="text-lg"
+                        className="text-2xl"
                     />
                 </div>
             </div>

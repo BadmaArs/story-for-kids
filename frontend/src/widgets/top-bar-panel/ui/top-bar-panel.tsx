@@ -7,10 +7,10 @@ import { ToReturn } from "@/shared/ui/to-return";
 // В этом компоненте собираются все элементы топ бар в quiz/:id
 
 interface Props {
-    total: number
+    total: number;
 }
 
-const TopBarPanel: React.FC<Props> = ({total}) => {
+const TopBarPanel: React.FC<Props> = ({ total }) => {
     const indexCurrentBook = useAppSelector(selectIndexBook);
 
     return (
@@ -18,7 +18,7 @@ const TopBarPanel: React.FC<Props> = ({total}) => {
             <div className="flex justify-between px-5 md:px-10">
                 <div className="flex items-center justify-center md:py-5">
                     <ToReturn to={`/lesson/${indexCurrentBook}`}>
-                        <button className="btn">Вернуться</button>
+                        <button className="btn text-lg">Вернуться</button>
                     </ToReturn>
                 </div>
                 <div className="">
@@ -26,7 +26,7 @@ const TopBarPanel: React.FC<Props> = ({total}) => {
                 </div>
             </div>
             <div className="px-5 md:px-10">
-                <Steps total={total}/>
+                <Steps total={total} />
             </div>
         </>
     );
