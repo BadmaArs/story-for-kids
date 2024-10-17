@@ -1,8 +1,25 @@
-import { Slide } from "@/entities/slide-content-type";
-import { Lesson } from "@/entities/topic/model/types";
-
-
-export interface CurrentQuiz {
-    currentQuiz: Lesson;
-    slides: Slide[]
+export interface Image {
+    url: string;
+}
+export interface LessonName {
+    lesson_name: string;
+}
+export interface Slide {
+    id: number;
+    number: number;
+    text: string;
+    type_slide: string;
+    img: Image[];
+    lesson: LessonName;
+}
+export interface Slides {
+    data: Slide[];
+    meta: {
+        pagination: {
+            page: number;
+            pageCount: number;
+            pageSize: number;
+            total: number;
+        };
+    };
 }

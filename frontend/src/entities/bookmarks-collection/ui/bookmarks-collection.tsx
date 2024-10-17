@@ -3,7 +3,7 @@ import { selectBookmark } from "../model/selectors";
 
 const BookmarksCollection = () => {
     const bookmarks = useAppSelector(selectBookmark);
-
+    
     if (bookmarks.length == 0) {
         return <div className="text-lg text-center">Здесь нет заметок</div>;
     } else {

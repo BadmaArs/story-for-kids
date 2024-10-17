@@ -2,24 +2,11 @@ import { useState } from "react";
 import ReactPlayer from "react-player";
 import "./content-type.css";
 import { marked } from "marked";
+import { Slides } from "@/entities/slide/model/types";
 
-interface Image {
-    url: string;
-}
+type SlidesData = Omit<Slides, "meta">;
 
-interface Slide {
-    id: number;
-    number: number;
-    text: string;
-    type_slide: string;
-    img: Image[];
-}
-
-interface Slides {
-    data: Slide[];
-}
-
-export const ContentImage: React.FC<Slides> = ({ data }) => {
+export const ContentImage: React.FC<SlidesData> = ({ data }) => {
     return (
         <div className="flex w-full flex-col border-opacity-50">
             <div className="card bg-base-300 rounded-box grid h-auto place-items-center">
@@ -32,7 +19,7 @@ export const ContentImage: React.FC<Slides> = ({ data }) => {
     );
 };
 
-export const ContentTextAndImage: React.FC<Slides> = ({ data }) => {
+export const ContentTextAndImage: React.FC<SlidesData> = ({ data }) => {
     const getHTML = () => {
         const html = marked(data[0].text);
         return { __html: html };
@@ -62,7 +49,7 @@ export const ContentTextAndImage: React.FC<Slides> = ({ data }) => {
     );
 };
 
-export const ContentVideo: React.FC<Slides> = ({ data }) => {
+export const ContentVideo: React.FC<SlidesData> = ({ data }) => {
     return (
         <div className="flex w-full flex-col justify-center md:flex-row md:gap-3">
             <div className="card w-full bg-base-300 rounded-box grid h-auto place-items-center p-2">
@@ -79,7 +66,7 @@ export const ContentVideo: React.FC<Slides> = ({ data }) => {
     );
 };
 
-export const ContentVideoAndText: React.FC<Slides> = ({ data }) => {
+export const ContentVideoAndText: React.FC<SlidesData> = ({ data }) => {
     return (
         <>
             <div className="flex w-full flex-col border-opacity-50 md:flex-row md:gap-3">
@@ -118,7 +105,7 @@ export const ContentVideoAndText: React.FC<Slides> = ({ data }) => {
     );
 };
 
-export const ContentText: React.FC<Slides> = ({ data }) => {
+export const ContentText: React.FC<SlidesData> = ({ data }) => {
     const getHTML = () => {
         const html = marked(data[0].text);
         return { __html: html };
@@ -174,7 +161,7 @@ const questions: Question[] = [
     },
 ];
 
-export const ContentQuiz: React.FC<Slides> = ({ data }) => {
+export const ContentQuiz: React.FC<SlidesData> = ({ data }) => {
     const [checkAnswer, setCheckAnswer] = useState<boolean>(false);
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
     const disableAllOptions = () => {

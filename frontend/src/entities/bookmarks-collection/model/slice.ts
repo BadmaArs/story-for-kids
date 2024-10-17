@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { BookmarkMaterial, BookmarkMaterialArray } from "./types";
 
-const initialState: BookmarkMaterialArray = {
+const initialState: any = {
     bookmarkMaterials: [],
 };
 
@@ -9,7 +8,7 @@ const bookmarkSlice = createSlice({
     name: "bookmark",
     initialState,
     reducers: {
-        addNewBookmark(state, actions: PayloadAction<BookmarkMaterial>) {
+        addNewBookmark(state, actions: PayloadAction<any>) {
             state.bookmarkMaterials.push(actions.payload);
         },
     },

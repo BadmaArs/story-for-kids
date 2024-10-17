@@ -1,3 +1,4 @@
+import { Slides } from "@/entities/slide/model/types";
 import {
     ContentTextAndImage,
     ContentImage,
@@ -7,23 +8,9 @@ import {
     ContentQuiz,
 } from "@/shared/ui/content-type";
 
-interface Image {
-    url: string; 
-}
+type SlidesData = Omit<Slides, "meta">;
 
-interface Slide {
-    id: number;        
-    number: number;    
-    text: string;      
-    type_slide: string;
-    img: Image[];      
-}
-
-interface Slides {
-    data: Slide[]; 
-}
-
-const Content:React.FC<Slides> = ({ data }) => {
+const Content: React.FC<SlidesData> = ({ data }) => {
     const renderContent = () => {
         switch (data[0].type_slide) {
             case "text_and_img":

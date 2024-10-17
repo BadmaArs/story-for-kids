@@ -1,11 +1,22 @@
 import { useState } from "react";
 import bookmarkActiveIcon from "@/shared/assets/bookmark-active.svg";
 import bookmarkNoActiveIcon from "@/shared/assets/bookmark-no-active.svg";
+import { useAppSelector } from "@/app/hooks@depercated";
+import {
+    selectIndexLesson,
+    selectIndexSlide,
+} from "@/features/quiz-navigation";
 
 const Bookmark = () => {
+    const indexCurrentSlide = useAppSelector(selectIndexSlide);
+    const indexCurrentLesson = useAppSelector(selectIndexLesson);
     const [isActive, setIsActive] = useState(false);
 
     const handleToggleBookmark = () => {
+        const url = {
+            url: `quiz/${indexCurrentLesson}`,
+            selectedSlide: indexCurrentSlide,
+        };
         setIsActive(!isActive);
     };
 

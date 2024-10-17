@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { Slides } from "../model/types";
+import { Slides } from "@/entities/slide/model/types";
 
 const apiToken = import.meta.env.VITE_API_GET_BOOKS_TOKEN;
 
