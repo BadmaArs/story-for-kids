@@ -3,9 +3,9 @@ import {
     ContentTextAndImage,
     ContentImage,
     ContentText,
-    ContentVideo,
-    ContentVideoAndText,
-    ContentQuiz,
+    // ContentVideo,
+    // ContentVideoAndText,
+    // ContentQuiz,
 } from "@/shared/ui/content-type";
 
 type SlidesData = Omit<Slides, "meta">;
@@ -19,12 +19,12 @@ const Content: React.FC<SlidesData> = ({ data }) => {
                 return <ContentText data={data} />;
             case "img":
                 return <ContentImage data={data} />;
-            case "video":
-                return <ContentVideo data={data} />;
-            case "video-text":
-                return <ContentVideoAndText data={data} />;
-            case "questions":
-                return <ContentQuiz data={data} />;
+            // case "video":
+            //     return <ContentVideo data={data} />;
+            // case "video-text":
+            //     return <ContentVideoAndText data={data} />;
+            // case "questions":
+            //     return <ContentQuiz data={data} />;
         }
     };
     return (
