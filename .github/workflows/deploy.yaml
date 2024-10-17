@@ -29,7 +29,7 @@ jobs:
         with:
           switches: -vzr --delete
           path: dist/
-          remote_path: /var/www/
+          remote_path: /var/www/html/
           remote_host: 217.12.38.239
           remote_user: root
           remote_key: ${{ secrets.SSH_PRIVATE_KEY  }}
