@@ -20,6 +20,8 @@ export const ContentImage: React.FC<SlidesData> = ({ data }) => {
 };
 
 export const ContentTextAndImage: React.FC<SlidesData> = ({ data }) => {
+    const [currentImage, setCurrentImage] = useState<number>(0);
+
     const getHTML = () => {
         const html = marked(data[0].text);
         return { __html: html };
@@ -28,14 +30,40 @@ export const ContentTextAndImage: React.FC<SlidesData> = ({ data }) => {
         <>
             <div className="flex w-full flex-col border-opacity-50 md:flex-row md:gap-3">
                 <div className="card bg-base-300 rounded-box grid h-auto place-items-center md:w-1/2 md:px-3">
-                    <img
+                    {/* <img
                         alt="Tailwind CSS examples"
                         src={
                             `https://kalmykhistory.ru/strapi` +
                             data[0].img[0].url
                         }
                         className="md:w-full md:max-h-96 md:object-contain"
-                    />
+                    /> */}
+                    <div className="carousel">
+                        <div id="item1" className="carousel-item w-full">
+                            <img
+                                src={
+                                    `https://kalmykhistory.ru/strapi` +
+                                    data[0].img[currentImage].url
+                                }
+                                className="w-full"
+                            />
+                        </div>
+                    </div>
+                    {data[0].img.length > 1 ? (
+                        <div className="flex w-full justify-center gap-2 py-2">
+                            {data[0].img.map((_, index) => (
+                                <div
+                                    className={`btn btn-xs ${index === currentImage ? "btn-active" : ""}`}
+                                    key={index}
+                                    onClick={() => setCurrentImage(index)}
+                                >
+                                    {index + 1}
+                                </div>
+                            ))}
+                        </div>
+                    ) : (
+                        <></>
+                    )}
                 </div>
                 <div className="divider"></div>
                 <div className="card bg-base-300 rounded-box grid h-auto place-items-center p-2 md:w-1/2">
