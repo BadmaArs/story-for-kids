@@ -30,6 +30,6 @@ jobs:
           switches: -vzr --delete
           path: dist/
           remote_path: /var/www/
-          remote_host: 31.128.45.217
+          remote_host: 217.12.38.239
           remote_user: root
           remote_key: ${{ secrets.SSH_PRIVATE_KEY  }}
