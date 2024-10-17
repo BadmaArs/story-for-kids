@@ -9,7 +9,6 @@ import {
 const BookmarksCollection = () => {
     const dispatch = useAppDispatch();
     const bookmarks = useAppSelector(selectBookmark);
-    console.log(bookmarks);
 
     const handleSetIndex = (index: number) => {
         dispatch(setIndexCurrentLesson(bookmarks[index].selectedLesson));

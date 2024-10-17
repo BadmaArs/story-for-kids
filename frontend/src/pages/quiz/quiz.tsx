@@ -47,7 +47,7 @@ const Quiz = () => {
     if (isLoading) return <Loader />;
     if (error) return <div>Произошла ошибка</div>;
     if (!slides) return <div>Слайды не найдены</div>;
-    
+
     return (
         <div className="">
             <TopBarPanel

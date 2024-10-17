@@ -2,8 +2,6 @@ interface Props {
     onClick: () => void;
 }
 
-// UI компоненты для переключения слайдов 
-
 export const Prev: React.FC<Props> = ({ onClick }) => {
     return (
         <kbd

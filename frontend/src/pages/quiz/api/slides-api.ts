@@ -26,5 +26,3 @@ export const slidesApi = createApi({
 });
 
 export const { useGetSlidesQuery } = slidesApi;
-
-// /api/slides?filters[lesson][id]=${lessonId}&sort[1]=number:asc&pagination[page]=${slideIdx}&pagination[pageSize]=1

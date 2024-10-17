@@ -4,8 +4,6 @@ import { Bookmark } from "@/features/bookmark";
 import { selectIndexBook } from "@/features/quiz-navigation/model/selectors";
 import { ToReturn } from "@/shared/ui/to-return";
 
-// В этом компоненте собираются все элементы топ бар в quiz/:id
-
 interface Props {
     total: number;
     lesson_name: string;

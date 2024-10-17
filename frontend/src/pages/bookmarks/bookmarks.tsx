@@ -5,7 +5,7 @@ import { BookmarksList } from "@/widgets/bookmarks-list";
 
 const Bookmarks = () => {
     const indexCurrentBook = useAppSelector(selectIndexBook);
-    
+
     return (
         <div className="">
             <ToReturn to={`/lesson/${indexCurrentBook}`}>

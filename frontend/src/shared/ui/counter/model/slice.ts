@@ -1,7 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// Counter требовался для инициализации redux-toolkit практической значимости теперь не имеет
-
 interface IProps {
     value: number;
 }

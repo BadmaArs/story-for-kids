@@ -22,4 +22,3 @@ export const lessonsApi = createApi({
 });
 
 export const { useGetLessonsQuery } = lessonsApi;
-

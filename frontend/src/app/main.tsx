@@ -11,7 +11,7 @@ import { Loader } from "@/shared/ui/loader";
 createRoot(document.getElementById("root")!).render(
     <Provider store={appStore}>
         <PersistGate loading={<Loader />} persistor={persistor}>
-        <RouterProvider router={router} />
+            <RouterProvider router={router} />
         </PersistGate>
     </Provider>,
 );

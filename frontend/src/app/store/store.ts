@@ -34,9 +34,16 @@ export function makeStore() {
         middleware: (getDefaultMiddleware) =>
             getDefaultMiddleware({
                 serializableCheck: {
-                  ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+                    ignoredActions: [
+                        FLUSH,
+                        REHYDRATE,
+                        PAUSE,
+                        PERSIST,
+                        PURGE,
+                        REGISTER,
+                    ],
                 },
-              })
+            })
                 .concat(lessonsApi.middleware)
                 .concat(booksApi.middleware)
                 .concat(slidesApi.middleware),

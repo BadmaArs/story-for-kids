@@ -1,7 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-// slice для индекса текущего слайда на странице quiz/:id
-
 interface IndexCurrentSlide {
     indexCurrentSlide: number;
     indexCurrentLesson: number;
