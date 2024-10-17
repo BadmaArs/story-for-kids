@@ -47,11 +47,12 @@ const Quiz = () => {
     if (isLoading) return <Loader />;
     if (error) return <div>Произошла ошибка</div>;
     if (!slides) return <div>Слайды не найдены</div>;
-    console.log(slides.data[0].lesson.lesson_name);
+    
     return (
         <div className="">
             <TopBarPanel
                 total={slides?.meta?.pagination?.total}
+                lesson_name={slides.data[0].lesson.lesson_name}
             />
             <Content data={slides.data} />
             <div className="flex justify-center gap-10 py-3">

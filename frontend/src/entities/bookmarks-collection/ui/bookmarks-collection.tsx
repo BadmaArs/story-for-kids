@@ -1,26 +1,42 @@
-import { useAppSelector } from "@/app/hooks@depercated";
+import { Link } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "@/app/hooks@depercated";
 import { selectBookmark } from "../model/selectors";
+import {
+    setIndexCurrentLesson,
+    setIndexCurrentSlide,
+} from "@/features/quiz-navigation/model/slice";
 
 const BookmarksCollection = () => {
+    const dispatch = useAppDispatch();
     const bookmarks = useAppSelector(selectBookmark);
-    
+    console.log(bookmarks);
+
+    const handleSetIndex = (index: number) => {
+        dispatch(setIndexCurrentLesson(bookmarks[index].selectedLesson));
+        dispatch(setIndexCurrentSlide(bookmarks[index].selectedSlide));
+    };
+
     if (bookmarks.length == 0) {
         return <div className="text-lg text-center">Здесь нет заметок</div>;
     } else {
         return (
             <div className="">
-                {/* {bookmarks.map((item, index) => (
-                    <ul className="list-disc ml-5 md:ml-10 text-lg" key={index}>
+                {bookmarks.map((item, index) => (
+                    <ul
+                        className="list-disc ml-5 md:ml-10 text-lg"
+                        key={index}
+                        onClick={() => handleSetIndex(index)}
+                    >
                         <li>
-                            <a href={item.link}>
+                            <Link to={`/${item.url}`}>
                                 <p>
-                                    {item.lessonName} слайд:{" "}
-                                    {item.numberSlide + 1}
+                                    {item.lesson_name} слайд:{" "}
+                                    {item.selectedSlide}
                                 </p>
-                            </a>
+                            </Link>
                         </li>
                     </ul>
-                ))} */}
+                ))}
             </div>
         );
     }

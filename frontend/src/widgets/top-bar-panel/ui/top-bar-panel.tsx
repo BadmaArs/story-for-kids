@@ -8,9 +8,10 @@ import { ToReturn } from "@/shared/ui/to-return";
 
 interface Props {
     total: number;
+    lesson_name: string;
 }
 
-const TopBarPanel: React.FC<Props> = ({ total }) => {
+const TopBarPanel: React.FC<Props> = ({ total, lesson_name }) => {
     const indexCurrentBook = useAppSelector(selectIndexBook);
 
     return (
@@ -22,7 +23,7 @@ const TopBarPanel: React.FC<Props> = ({ total }) => {
                     </ToReturn>
                 </div>
                 <div className="">
-                    <Bookmark />
+                    <Bookmark lesson_name={lesson_name} />
                 </div>
             </div>
             <div className="px-5 md:px-10">

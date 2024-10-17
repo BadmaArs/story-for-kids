@@ -1,22 +1,61 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import bookmarkActiveIcon from "@/shared/assets/bookmark-active.svg";
 import bookmarkNoActiveIcon from "@/shared/assets/bookmark-no-active.svg";
-import { useAppSelector } from "@/app/hooks@depercated";
+import { useAppDispatch, useAppSelector } from "@/app/hooks@depercated";
 import {
     selectIndexLesson,
     selectIndexSlide,
 } from "@/features/quiz-navigation";
+import {
+    addNewBookmark,
+    removeBookmark,
+} from "@/entities/bookmarks-collection/model/slice";
+import { selectBookmark } from "@/entities/bookmarks-collection";
 
-const Bookmark = () => {
+interface Props {
+    lesson_name: string;
+}
+
+const Bookmark: React.FC<Props> = ({ lesson_name }) => {
+    const dispatch = useAppDispatch();
     const indexCurrentSlide = useAppSelector(selectIndexSlide);
     const indexCurrentLesson = useAppSelector(selectIndexLesson);
+    const Bookmarks = useAppSelector(selectBookmark);
+
     const [isActive, setIsActive] = useState(false);
 
-    const handleToggleBookmark = () => {
-        const url = {
+    useEffect(() => {
+        const bookmarkInfo = {
             url: `quiz/${indexCurrentLesson}`,
             selectedSlide: indexCurrentSlide,
+            selectedLesson: indexCurrentLesson,
+            lesson_name: lesson_name,
         };
+
+        const isBookmarkExists = Bookmarks.some(
+            (bookmark) =>
+                bookmark.url === bookmarkInfo.url &&
+                bookmark.selectedSlide === bookmarkInfo.selectedSlide &&
+                bookmark.selectedLesson === bookmarkInfo.selectedLesson &&
+                bookmark.lesson_name === bookmarkInfo.lesson_name,
+        );
+
+        setIsActive(isBookmarkExists);
+    }, [Bookmarks, indexCurrentSlide, indexCurrentLesson, lesson_name]);
+
+    const handleToggleBookmark = () => {
+        const bookmarkInfo = {
+            url: `quiz/${indexCurrentLesson}`,
+            selectedSlide: indexCurrentSlide,
+            selectedLesson: indexCurrentLesson,
+            lesson_name: lesson_name,
+        };
+        if (isActive) {
+            dispatch(removeBookmark(bookmarkInfo));
+        } else {
+            dispatch(addNewBookmark(bookmarkInfo));
+        }
+
         setIsActive(!isActive);
     };
 
