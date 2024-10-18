@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import ReactPlayer from "react-player";
 import "./content-type.css";
 import { marked } from "marked";
@@ -26,22 +26,30 @@ export const ContentTextAndImage: React.FC<SlidesData> = ({ data }) => {
         const html = marked(data[0].text);
         return { __html: html };
     };
+    useEffect(() => {
+        if (data[0]?.img?.length === 1) {
+            setCurrentImage(0);
+        }
+    }, [data]);
     return (
         <>
             <div className="flex w-full flex-col border-opacity-50 md:flex-row md:gap-3">
                 <div className="card bg-base-300 rounded-box grid h-auto place-items-center md:w-1/2 md:px-3">
                     <div className="carousel">
                         <div id="item1" className="carousel-item w-full">
-                            <img
-                                src={
-                                    `https://kalmykhistory.ru/strapi` +
-                                    data[0].img[currentImage].url
-                                }
-                                className="w-full"
-                            />
+                            {data[0]?.img?.length > 0 &&
+                                data[0].img[currentImage] && (
+                                    <img
+                                        src={
+                                            `https://kalmykhistory.ru/strapi` +
+                                            data[0].img[currentImage].url
+                                        }
+                                        className="w-full"
+                                    />
+                                )}
                         </div>
                     </div>
-                    {data[0].img.length > 1 ? (
+                    {data[0]?.img?.length > 1 ? (
                         <div className="flex w-full justify-center gap-2 py-2">
                             {data[0].img.map((_, index) => (
                                 <div
