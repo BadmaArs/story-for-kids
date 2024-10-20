@@ -19,7 +19,7 @@ import { rootReducer } from "./rootReducer";
 const persistConfig = {
     key: "root",
     storage,
-    blackList: [
+    blacklist: [
         lessonsApi.reducerPath,
         booksApi.reducerPath,
         slidesApi.reducerPath,
