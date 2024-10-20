@@ -6,6 +6,7 @@ import { useGetSlidesQuery } from "./api/slides-api";
 import { useAppDispatch, useAppSelector } from "@/app/hooks@depercated";
 import { selectIndexSlide } from "@/features/quiz-navigation";
 import {
+    setIndexCurrentImage,
     setIndexCurrentLesson,
     setIndexCurrentSlide,
 } from "@/features/quiz-navigation/model/slice";
@@ -34,12 +35,14 @@ const Quiz = () => {
 
     const handleNext = () => {
         if (slides && indexCurrentSlide < slides.meta.pagination.total) {
+            dispatch(setIndexCurrentImage(0));
             dispatch(setIndexCurrentSlide(indexCurrentSlide + 1));
         }
     };
 
     const handlePrev = () => {
         if (indexCurrentSlide > 0) {
+            dispatch(setIndexCurrentImage(0));
             dispatch(setIndexCurrentSlide(indexCurrentSlide - 1));
         }
     };

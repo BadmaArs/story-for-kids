@@ -1,6 +1,9 @@
 import { useAppDispatch, useAppSelector } from "@/app/hooks@depercated";
 import { selectIndexSlide } from "@/features/quiz-navigation";
-import { setIndexCurrentSlide } from "@/features/quiz-navigation/model/slice";
+import {
+    setIndexCurrentImage,
+    setIndexCurrentSlide,
+} from "@/features/quiz-navigation/model/slice";
 
 interface Props {
     total: number;
@@ -11,6 +14,7 @@ const Steps: React.FC<Props> = ({ total }) => {
     const indexCurrentSlide = useAppSelector(selectIndexSlide);
 
     const handleSetIndexSlide = (index: number) => {
+        dispatch(setIndexCurrentImage(0));
         dispatch(setIndexCurrentSlide(index));
     };
 

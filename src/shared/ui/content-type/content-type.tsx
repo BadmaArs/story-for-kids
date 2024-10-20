@@ -1,8 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 // import ReactPlayer from "react-player";
 import "./content-type.css";
 import { marked } from "marked";
 import { Slides } from "@/entities/slide/model/types";
+import { useAppDispatch, useAppSelector } from "@/app/hooks@depercated";
+import { selectIndexImage } from "@/features/quiz-navigation/model/selectors";
+import { setIndexCurrentImage } from "@/features/quiz-navigation/model/slice";
 
 type SlidesData = Omit<Slides, "meta">;
 
@@ -20,7 +23,8 @@ export const ContentImage: React.FC<SlidesData> = ({ data }) => {
 };
 
 export const ContentTextAndImage: React.FC<SlidesData> = ({ data }) => {
-    const [currentImage, setCurrentImage] = useState<number>(0);
+    const dispatch = useAppDispatch();
+    const currentIndexImage = useAppSelector(selectIndexImage);
 
     const getHTML = () => {
         const html = marked(data[0].text);
@@ -28,9 +32,13 @@ export const ContentTextAndImage: React.FC<SlidesData> = ({ data }) => {
     };
     useEffect(() => {
         if (data[0]?.img?.length === 1) {
-            setCurrentImage(0);
+            dispatch(setIndexCurrentImage(0));
         }
-    }, [data]);
+    }, [data, dispatch]);
+
+    const handleIndex = (index: number) => {
+        dispatch(setIndexCurrentImage(index));
+    };
     return (
         <>
             <div className="flex w-full flex-col border-opacity-50 md:flex-row md:gap-3">
@@ -38,11 +46,11 @@ export const ContentTextAndImage: React.FC<SlidesData> = ({ data }) => {
                     <div className="carousel">
                         <div id="item1" className="carousel-item w-full">
                             {data[0]?.img?.length > 0 &&
-                                data[0].img[currentImage] && (
+                                data[0].img[currentIndexImage] && (
                                     <img
                                         src={
                                             `https://kalmykhistory.ru/strapi` +
-                                            data[0].img[currentImage].url
+                                            data[0].img[currentIndexImage].url
                                         }
                                         className="w-full"
                                     />
@@ -53,9 +61,9 @@ export const ContentTextAndImage: React.FC<SlidesData> = ({ data }) => {
                         <div className="flex w-full justify-center gap-2 py-2">
                             {data[0].img.map((_, index) => (
                                 <div
-                                    className={`btn btn-xs ${index === currentImage ? "btn-active" : ""}`}
+                                    className={`btn btn-xs ${index === currentIndexImage ? "btn-active" : ""}`}
                                     key={index}
-                                    onClick={() => setCurrentImage(index)}
+                                    onClick={() => handleIndex(index)}
                                 >
                                     {index + 1}
                                 </div>
