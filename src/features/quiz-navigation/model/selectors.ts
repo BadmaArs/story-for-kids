@@ -8,3 +8,6 @@ export const selectIndexSlide = (state: RootState) =>
 
 export const selectIndexBook = (state: RootState) =>
     state.indexCurrentLessonAndSlide.indexCurrentBook;
+
+export const selectIndexImage = (state: RootState) => 
+    state.indexCurrentLessonAndSlide.indexCurrentImage
